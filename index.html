@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos López | Fotógrafo de Bodas en Cartagena</title>
+    <meta name="description" content="Soy Carlos López. Fotógrafo de bodas en Cartagena con una década de trayectoria dedicada a entender el latido de cada celebración.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">Carlos López</div>
+        <nav class="nav">
+            <a href="#intro">Inicio</a>
+            <a href="#about">Sobre Mí</a>
+            <a href="#portfolio">Portafolio</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+        <button class="menu-toggle">Menu</button>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="video-container">
+                <video autoplay loop muted playsinline id="hero-video">
+                    <source src="assets/vid/hero.mp4" type="video/mp4">
+                </video>
+                <div class="overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Carlos López</h1>
+                <p class="hero-subtitle">Fotógrafo de bodas en Cartagena</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Descubrir</span>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="intro" id="intro">
+            <div class="container">
+                <blockquote class="intro-quote">
+                    “Hay quienes ven una boda como una sucesión de momentos programados. Yo la veo como una coreografía de emociones genuinas: una mirada cómplice, la risa que desborda los nervios, el abrazo que detiene el tiempo.”
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container about-grid">
+                <div class="about-text">
+                    <h2>Mi Visión</h2>
+                    <p>Soy Carlos López. Comunicador audiovisual desde 2022 y fotógrafo de bodas en Cartagena con una década de trayectoria dedicada a entender el latido de cada celebración.</p>
+                    <p>Mi enfoque huye de lo convencional no por romper esquemas, sino porque creo que las mejores historias merecen contarse desde la verdad, la espontaneidad y una alegría desbordante que contagie a quienes están frente a la cámara.</p>
+                    <p>Cada pareja guarda un universo único. Mi trabajo es descifrarlo, transformar la luz de nuestra ciudad en arte y entregarte un legado visual que, dentro de veinte años, te devuelva exactamente la misma emoción.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/img/gallery/_DSC4432.jpg" alt="Carlos López en acción">
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Portafolio</h2>
+                <div class="masonry-grid" id="gallery-grid">
+                    <!-- Gallery items will be injected here via JS -->
+                </div>
+                <div class="portfolio-action">
+                    <a href="#contact" class="btn">Cuenta tu historia</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2>¿Empezamos a crear tu legado?</h2>
+                <p>Escríbeme y hablemos de tu boda.</p>
+                <div class="contact-links">
+                    <a href="mailto:contacto@carloslopez.com" class="contact-link">contacto@carloslopez.com</a>
+                    <a href="https://instagram.com" target="_blank" class="contact-link">Instagram</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Carlos López Fotografía. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
