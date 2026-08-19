@@ -96,6 +96,37 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 2.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.lang-switcher a {
+    margin-left: 0;
+    opacity: 0.6;
+}
+
+.lang-switcher a:hover {
+    opacity: 1;
+}
+
+.lang-switcher a::after {
+    display: none;
+}
+
+.lang-switcher .active {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.lang-switcher .separator {
+    margin: 0 0.5rem;
+    opacity: 0.4;
+}
+
 .menu-toggle {
     display: none;
     background: none;
@@ -140,6 +171,57 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    z-index: 10;
+    display: flex;
+    gap: 15px;
+}
+
+.video-controls button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-light);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.video-controls button svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.video-controls button:hover {
+    background: var(--color-light);
+    color: var(--color-dark);
+    border-color: var(--color-light);
+}
+
+.video-controls button:hover svg {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .video-controls {
+        bottom: 30px;
+        right: 30px;
+    }
+    .video-controls button {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .hero-content {

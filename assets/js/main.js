@@ -1,38 +1,76 @@
 // Wait for DOM to be ready
 document.addEventListener("DOMContentLoaded", (event) => {
+    // Video cycling logic
+    const heroVideo = document.getElementById('hero-video');
+    const prevBtn = document.getElementById('prev-video');
+    const nextBtn = document.getElementById('next-video');
+    
+    if (heroVideo) {
+        const videos = ["vid1.mp4", "vid2.mp4", "vid3.mp4", "vid4.mp4"];
+        let currentVideoIndex = 0;
+        
+        const playVideo = (index) => {
+            heroVideo.src = `assets/vid/${videos[index]}`;
+            heroVideo.play().catch(e => console.log("Autoplay prevented", e));
+        };
+
+        heroVideo.addEventListener('ended', () => {
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            playVideo(currentVideoIndex);
+        });
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                playVideo(currentVideoIndex);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                playVideo(currentVideoIndex);
+            });
+        }
+    }
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
 
-    // List of optimized images from the gallery
-    const images = [
-        "DSC00045.jpg", "DSC00064.jpg", "DSC00097.jpg", "DSC09526.jpg", "DSC09534.jpg",
-        "DSC09543.jpg", "DSC09551.jpg", "DSC09589.jpg", "DSC09866.jpg", "DSC09895.jpg",
-        "DSC09953.jpg", "DSC09990.jpg", "LTS06866.jpg", "LTS06873.jpg", "LTS06895.jpg",
-        "LTS06947.jpg", "LTS07039.jpg", "LTS07105.jpg", "LTS07238.jpg", "LTS07325.jpg",
-        "LTS07343.jpg", "LTS07373.jpg", "_DSC1392.jpg", "_DSC1431.jpg", "_DSC1454.jpg",
-        "_DSC1511.jpg", "_DSC1516.jpg", "_DSC1520.jpg", "_DSC1740.jpg", "_DSC2076.jpg",
-        "_DSC2885.jpg", "_DSC2906.jpg", "_DSC3051.jpg", "_DSC3062.jpg", "_DSC3463.jpg",
-        "_DSC3495.jpg", "_DSC3685.jpg", "_DSC4432.jpg", "_DSC4559.jpg", "_DSC6018.jpg",
-        "_DSC6020.jpg", "_DSC6376.jpg", "_DSC6854.jpg", "_DSC6856.jpg", "_DSC7016.jpg",
-        "_DSC7034.jpg"
-    ];
-
-    // Populate Masonry Grid
+    // Populate Masonry Grid from JSON
     const grid = document.getElementById('gallery-grid');
     if (grid) {
-        images.forEach((imgSrc, index) => {
-            // Exclude the hero image used in about section if we want, or just include all.
-            const item = document.createElement('div');
-            item.className = 'masonry-item';
-            
-            const img = document.createElement('img');
-            img.src = `assets/img/gallery/${imgSrc}`;
-            img.alt = `Boda capturada por Carlos López ${index + 1}`;
-            img.loading = "lazy";
-            
-            item.appendChild(img);
-            grid.appendChild(item);
-        });
+        fetch('assets/data/portfolio.json')
+            .then(response => response.json())
+            .then(data => {
+                data.images.forEach((imgSrc, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'masonry-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = `assets/img/gallery/${imgSrc}`;
+                    img.alt = `Boda capturada por Carlos López ${index + 1}`;
+                    img.loading = "lazy";
+                    
+                    item.appendChild(img);
+                    grid.appendChild(item);
+                });
+                
+                // Initialize ScrollTrigger for new items
+                gsap.utils.toArray('.masonry-item').forEach((item, i) => {
+                    gsap.from(item, {
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 90%",
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
+                });
+                ScrollTrigger.refresh();
+            })
+            .catch(error => console.error("Error loading portfolio:", error));
     }
 
     // Header Scroll Effect
@@ -64,6 +102,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         opacity: 1,
         duration: 1
     }, "-=0.5");
+
+    // Fade out hero content after 4 seconds to avoid conflicting with video text
+    gsap.to(['.hero-title', '.hero-subtitle', '.scroll-indicator'], {
+        opacity: 0,
+        duration: 2,
+        delay: 4,
+        ease: "power2.inOut"
+    });
 
     // Scroll Animations
     // Intro text
@@ -107,19 +153,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     );
 
-    // Portfolio items reveal
-    gsap.utils.toArray('.masonry-item').forEach((item, i) => {
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: "top 90%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.out"
-        });
-    });
+    // Portfolio items reveal is now handled after fetch in the JSON promise.
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
