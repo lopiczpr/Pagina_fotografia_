@@ -60,12 +60,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .header.scrolled {
     padding: 1rem 5%;
-    background: rgba(250, 248, 245, 0.95);
+    background: rgba(250, 248, 245, 0.7);
     color: var(--text-color);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     text-shadow: none;
     filter: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .logo {
@@ -397,11 +399,57 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--text-color);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 100%;
 }
 
 .btn:hover {
-    background: var(--text-color);
     color: var(--bg-color);
+}
+
+/* Testimonials */
+.testimonials {
+    padding: clamp(4rem, 10vw, 8rem) 0;
+    background-color: var(--bg-color);
+    text-align: center;
+}
+
+.testimonial-item {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial-quote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}
+
+.testimonial-author {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
 }
 
 /* Contact */
@@ -576,4 +624,97 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-lang-switcher .active {
     font-weight: 600;
+}
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.preloader-text {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-color);
+    opacity: 0;
+}
+
+/* Floating WhatsApp */
+.floating-wa {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 99;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-wa:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .floating-wa {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    .floating-wa svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Custom Cursor (Desktop Only) */
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    
+    a, button, .masonry-item {
+        cursor: none;
+    }
+    
+    .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        background-color: var(--text-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        background-color: #fff;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    }
+    
+    .custom-cursor.hover {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid #fff;
+    }
 }

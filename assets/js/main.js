@@ -1,6 +1,21 @@
 // Wait for DOM to be ready
 document.addEventListener("DOMContentLoaded", (event) => {
     
+    // Custom Cursor Logic
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const hoverElements = document.querySelectorAll('a, button, .masonry-item, .video-controls button');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+    }
+    
     // Mobile Menu Logic
     const menuToggle = document.getElementById('menu-toggle');
     const menuClose = document.getElementById('menu-close');
@@ -109,8 +124,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     });
 
-    // Initial Hero Animation
+    // Initial Hero Animation & Preloader
     const heroTl = gsap.timeline();
+    const preloader = document.querySelector('.preloader');
+    
+    if (preloader) {
+        heroTl.to('.preloader-text', {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+        })
+        .to('.preloader', {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut",
+            delay: 0.5,
+            onComplete: () => {
+                preloader.style.visibility = 'hidden';
+                preloader.style.display = 'none';
+            }
+        });
+    }
+
     heroTl.to('.hero-title', {
         y: 0,
         opacity: 1,
@@ -178,6 +213,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     );
+
+    // Testimonials
+    gsap.from('.testimonial-item', {
+        scrollTrigger: {
+            trigger: '.testimonials',
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+    });
 
     // Portfolio items reveal is now handled after fetch in the JSON promise.
 
