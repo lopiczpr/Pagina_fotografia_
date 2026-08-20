@@ -73,6 +73,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 playVideo(currentVideoIndex);
             });
         }
+
+        // iOS Safari Video Unlocker: Many mobile browsers block programmatic video play() 
+        // if it wasn't triggered by a user interaction. This unlocks it on the first touch.
+        document.body.addEventListener('touchstart', function() {
+            if (heroVideo && heroVideo.paused) {
+                heroVideo.play().catch(e => console.log("Unlocker failed:", e));
+            }
+        }, { once: true });
     }
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
