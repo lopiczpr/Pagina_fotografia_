@@ -300,43 +300,45 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // AJAX Form Logic
+    // WhatsApp Form Logic
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const btn = this.querySelector('button[type="submit"]');
-            const status = this.querySelector('.form-status');
             const originalBtnText = btn.innerText;
             
-            btn.innerText = "Enviando...";
+            btn.innerText = "Abriendo WhatsApp...";
             btn.disabled = true;
-            status.style.display = 'none';
 
-            fetch(this.action, {
-                method: this.method,
-                body: new FormData(this),
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    this.reset();
-                    status.innerText = "¡Mensaje enviado con éxito! Me comunicaré pronto.";
-                    status.className = "form-status success";
-                } else {
-                    status.innerText = "Hubo un error al enviar tu mensaje. Intenta de nuevo.";
-                    status.className = "form-status error";
-                }
-            }).catch(error => {
-                status.innerText = "Hubo un problema de conexión.";
-                status.className = "form-status error";
-            }).finally(() => {
-                status.style.display = 'block';
+            const formData = new FormData(this);
+            const name = formData.get('name') || '';
+            const email = formData.get('email') || '';
+            const date = formData.get('date') || '';
+            const message = formData.get('message') || '';
+            
+            const isEnglish = document.documentElement.lang === 'en';
+            let waText = "";
+            
+            if (isEnglish) {
+                waText = `Hi Carlos! I'm ${name}.\nMy email is: ${email}\nI'm inquiring about the date: ${date}\n\nMessage: ${message}`;
+            } else {
+                waText = `¡Hola Carlos! Soy ${name}.\nMi correo es: ${email}\nBusco disponibilidad para la fecha: ${date}\n\nMensaje: ${message}`;
+            }
+            
+            const encodedText = encodeURIComponent(waText);
+            const waUrl = `https://wa.me/573004075217?text=${encodedText}`;
+            
+            // Redirect to WhatsApp
+            window.open(waUrl, '_blank');
+
+            // Reset form UI after a short delay
+            setTimeout(() => {
                 btn.innerText = originalBtnText;
                 btn.disabled = false;
-            });
+                this.reset();
+            }, 1500);
         });
     }
 });
