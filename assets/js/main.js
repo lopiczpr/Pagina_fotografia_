@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const waUrl = `https://wa.me/573004075217?text=${encodedText}`;
             
             // Redirect to WhatsApp
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl;
 
             // Reset form UI after a short delay
             setTimeout(() => {
