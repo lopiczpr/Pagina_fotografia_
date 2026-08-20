@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlos López | Fotógrafo de Bodas en Cartagena y Colombia</title>
+    <title>Carlos López | Fotógrafo y Videógrafo de Bodas en Cartagena y Colombia</title>
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <meta name="description" content="Carlos López es un fotógrafo de bodas en Cartagena con un enfoque documental y cinematográfico. Descubre un portafolio premium de historias genuinas.">
-    <meta name="keywords" content="fotógrafo de bodas, Cartagena, Colombia, fotografía de bodas, bodas destino, wedding photographer, documental de bodas, Carlos López">
+    <meta name="description" content="Carlos López es un fotógrafo y videógrafo de bodas en Cartagena con un enfoque documental y cinematográfico. Descubre un portafolio premium de historias genuinas.">
+    <meta name="keywords" content="fotógrafo de bodas, videógrafo de bodas, Cartagena, Colombia, fotografía de bodas, video de bodas, bodas destino, wedding photographer, documental de bodas, Carlos López">
     <meta name="author" content="Carlos López">
     
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://carloslopezfotografia.com/">
-    <meta property="og:title" content="Carlos López | Fotografía de Bodas">
-    <meta property="og:description" content="Capturando la coreografía de emociones genuinas en tu boda. Fotografía documental y cinematográfica en Cartagena.">
+    <meta property="og:title" content="Carlos López | Fotografía y Video de Bodas">
+    <meta property="og:description" content="Capturando la coreografía de emociones genuinas en tu boda. Fotografía y video documental y cinematográfico en Cartagena.">
     <meta property="og:image" content="https://carloslopezfotografia.com/assets/img/profile.jpg">
     
     <link rel="canonical" href="https://carloslopezfotografia.com/">
@@ -41,7 +41,7 @@
         "addressLocality": "Cartagena",
         "addressCountry": "CO"
       },
-      "description": "Fotógrafo de bodas con enfoque cinematográfico y documental en Cartagena, Colombia."
+      "description": "Fotógrafo y videógrafo de bodas con enfoque cinematográfico y documental en Cartagena, Colombia."
     }
     </script>
 </head>
@@ -60,8 +60,35 @@
                 <a href="en.html">EN</a>
             </div>
         </nav>
-        <button class="menu-toggle">Menu</button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="menu-close" id="menu-close" aria-label="Cerrar menú">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <nav class="mobile-nav">
+            <a href="#intro">Inicio</a>
+            <a href="#about">Sobre Mí</a>
+            <a href="#portfolio">Portafolio</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+        <div class="mobile-lang-switcher">
+            <span class="active">ES</span>
+            <span class="separator">|</span>
+            <a href="en.html">EN</a>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -83,7 +110,7 @@
 
             <div class="hero-content">
                 <h1 class="hero-title">Carlos López</h1>
-                <p class="hero-subtitle">Fotógrafo de bodas en Cartagena</p>
+                <p class="hero-subtitle">Fotógrafo y Videógrafo de bodas en Cartagena</p>
             </div>
             <div class="scroll-indicator">
                 <span>Descubrir</span>
@@ -105,7 +132,7 @@
             <div class="container about-grid">
                 <div class="about-text">
                     <h2>Mi Visión</h2>
-                    <p>Soy Carlos López. Comunicador audiovisual desde 2022 y fotógrafo de bodas en Cartagena con una década de trayectoria dedicada a entender el latido de cada celebración.</p>
+                    <p>Soy Carlos López. Comunicador audiovisual desde 2022, fotógrafo y videógrafo de bodas en Cartagena con una década de trayectoria dedicada a entender el latido de cada celebración.</p>
                     <p>Mi enfoque huye de lo convencional no por romper esquemas, sino porque creo que las mejores historias merecen contarse desde la verdad, la espontaneidad y una alegría desbordante que contagie a quienes están frente a la cámara.</p>
                     <p>Cada pareja guarda un universo único. Mi trabajo es descifrarlo, transformar la luz de nuestra ciudad en arte y entregarte un legado visual que, dentro de veinte años, te devuelva exactamente la misma emoción.</p>
                 </div>
