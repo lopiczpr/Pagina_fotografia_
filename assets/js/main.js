@@ -241,4 +241,102 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     });
+
+    // Lightbox Logic (Event Delegation)
+    const gridEl = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lbClose = document.querySelector('.lightbox-close');
+    const lbPrev = document.querySelector('.lightbox-prev');
+    const lbNext = document.querySelector('.lightbox-next');
+    
+    let currentLightboxIndex = 0;
+    let imagesList = [];
+
+    if (gridEl && lightbox) {
+        gridEl.addEventListener('click', (e) => {
+            const item = e.target.closest('.masonry-item');
+            if (item) {
+                // Populate imagesList dynamically
+                const allItems = Array.from(gridEl.querySelectorAll('.masonry-item img'));
+                imagesList = allItems.map(img => img.src);
+                const clickedImg = item.querySelector('img');
+                currentLightboxIndex = imagesList.indexOf(clickedImg.src);
+                
+                showLightboxImage(currentLightboxIndex);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // prevent background scrolling
+            }
+        });
+
+        const showLightboxImage = (index) => {
+            if (index < 0) index = imagesList.length - 1;
+            if (index >= imagesList.length) index = 0;
+            currentLightboxIndex = index;
+            lightboxImg.src = imagesList[currentLightboxIndex];
+        };
+
+        lbClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        lbPrev.addEventListener('click', () => showLightboxImage(currentLightboxIndex - 1));
+        lbNext.addEventListener('click', () => showLightboxImage(currentLightboxIndex + 1));
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') lbClose.click();
+            if (e.key === 'ArrowLeft') lbPrev.click();
+            if (e.key === 'ArrowRight') lbNext.click();
+        });
+        
+        // Click outside image to close
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lbClose.click();
+            }
+        });
+    }
+
+    // AJAX Form Logic
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const status = this.querySelector('.form-status');
+            const originalBtnText = btn.innerText;
+            
+            btn.innerText = "Enviando...";
+            btn.disabled = true;
+            status.style.display = 'none';
+
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    this.reset();
+                    status.innerText = "¡Mensaje enviado con éxito! Me comunicaré pronto.";
+                    status.className = "form-status success";
+                } else {
+                    status.innerText = "Hubo un error al enviar tu mensaje. Intenta de nuevo.";
+                    status.className = "form-status error";
+                }
+            }).catch(error => {
+                status.innerText = "Hubo un problema de conexión.";
+                status.className = "form-status error";
+            }).finally(() => {
+                status.style.display = 'block';
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+            });
+        });
+    }
 });
