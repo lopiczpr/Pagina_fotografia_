@@ -290,7 +290,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Intro */
 .intro {
-    padding: 10rem 0;
+    padding: clamp(5rem, 15vw, 10rem) 0;
     text-align: center;
 }
 
@@ -306,7 +306,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* About */
 .about {
-    padding: 5rem 0 10rem;
+    padding: clamp(3rem, 8vw, 5rem) 0 clamp(5rem, 15vw, 10rem);
 }
 
 .about-grid {
@@ -317,7 +317,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-text h2 {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 6vw, 3rem);
     margin-bottom: 2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -344,16 +344,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Portfolio */
 .portfolio {
-    padding: 5rem 0;
+    padding: clamp(3rem, 8vw, 5rem) 0;
     background-color: #fff;
 }
 
 .section-title {
     text-align: center;
-    font-size: 4rem;
-    margin-bottom: 5rem;
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    margin-bottom: clamp(3rem, 8vw, 5rem);
     text-transform: uppercase;
     letter-spacing: 3px;
+    word-break: break-word;
 }
 
 .masonry-grid {
@@ -405,7 +406,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Contact */
 .contact {
-    padding: 12rem 0;
+    padding: clamp(6rem, 15vw, 12rem) 0;
     text-align: center;
 }
 
@@ -427,7 +428,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contact-link {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     font-family: var(--font-heading);
     color: var(--text-color);
     text-decoration: none;
@@ -491,6 +492,10 @@ h1, h2, h3, h4, h5, h6 {
     .contact-links {
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    .scroll-indicator {
+        display: none;
     }
 
     .container {
