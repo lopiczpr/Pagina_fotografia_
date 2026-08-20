@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             cursor.style.top = e.clientY + 'px';
         });
 
-        const hoverElements = document.querySelectorAll('a, button, .masonry-item, .video-controls button');
+        const hoverElements = document.querySelectorAll('a, button, .masonry-item, .video-controls button, .accordion-header');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -114,13 +114,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
             .catch(error => console.error("Error loading portfolio:", error));
     }
 
-    // Header Scroll Effect
+    // Header Scroll Effect & Scroll Progress Bar
     const header = document.querySelector('.header');
+    const progressBar = document.querySelector('.scroll-progress');
+    
     window.addEventListener('scroll', () => {
+        // Header
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+        
+        // Progress Bar
+        if (progressBar) {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
         }
     });
 
@@ -299,6 +310,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     }
+
+    // FAQ Accordion Logic
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            
+            // Close other items
+            const activeItem = document.querySelector('.accordion-item.active');
+            if (activeItem && activeItem !== item) {
+                activeItem.classList.remove('active');
+            }
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
 
     // WhatsApp Form Logic
     const contactForm = document.getElementById('contact-form');
